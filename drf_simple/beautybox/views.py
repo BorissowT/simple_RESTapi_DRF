@@ -10,7 +10,7 @@ from requests.exceptions import Timeout
 def beautyboxes_list(request):
     ### хз, как проверить эту конструкцию на таймоут. теоретически должно работать...
     try:
-        beautybox_list = req.get("https://stepik.org/media/attachments/course/73594/beautyboxes.json", timeout=4).json()
+        beautybox_list = req.get("https://stepik.org/media/attachments/course/73594/beautyboxes.json", timeout=10).json()
     except Timeout:
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
     #######
@@ -42,7 +42,7 @@ def beautyboxes_list(request):
 @api_view(http_method_names=['GET'])
 def recipients_list(request):
     try:
-        recipient_list = req.get("https://stepik.org/media/attachments/course/73594/recipients.json", timeout=4).json()
+        recipient_list = req.get("https://stepik.org/media/attachments/course/73594/recipients.json", timeout=10).json()
     except Timeout:
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
     if recipient_list:
@@ -54,7 +54,7 @@ def recipients_list(request):
 @api_view(http_method_names=['GET'])
 def beautybox_detail(request, id):
     try:
-        beautyboxes_list = req.get("https://stepik.org/media/attachments/course/73594/beautyboxes.json", timeout=4).json()
+        beautyboxes_list = req.get("https://stepik.org/media/attachments/course/73594/beautyboxes.json", timeout=10).json()
     except Timeout:
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
     response = None
@@ -70,7 +70,7 @@ def beautybox_detail(request, id):
 @api_view(http_method_names=['GET'])
 def recipient_detail(request, id):
     try:
-        recipients_list = req.get("https://stepik.org/media/attachments/course/73594/recipients.json", timeout=4).json()
+        recipients_list = req.get("https://stepik.org/media/attachments/course/73594/recipients.json", timeout=10).json()
     except Timeout:
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
     response = None
