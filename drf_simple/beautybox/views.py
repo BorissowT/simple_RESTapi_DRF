@@ -33,7 +33,10 @@ def beautyboxes_list(request):
                 if box["price"] >= int(min_price) and box["weight_grams"] >= int(min_weight):
                     result.append(box)
             return Response(result)
-    return Response(beautybox_list)
+    if beautybox_list:
+        return Response(beautybox_list)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(http_method_names=['GET'])
@@ -42,7 +45,10 @@ def recipients_list(request):
         recipient_list = req.get("https://stepik.org/media/attachments/course/73594/recipients.json", timeout=4).json()
     except Timeout:
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
-    return Response(recipient_list)
+    if recipient_list:
+        return Response(recipient_list)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(http_method_names=['GET'])
